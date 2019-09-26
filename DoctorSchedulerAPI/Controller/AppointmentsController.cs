@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using DoctorSchedulerAPI.Models;
+using System.Net;
 
 namespace DoctorSchedulerAPI.Controller
 {
@@ -28,37 +29,78 @@ namespace DoctorSchedulerAPI.Controller
         }
 
         // GET: api/Appointments/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Appointment>> GetAppointment(long id)
+        [HttpGet]
+        [Route("AppointmentByDate")]
+        public async Task<ActionResult<IEnumerable<Appointment>>> GetAppointmentByDate([FromQuery]string  DoctorName,DateTime date)
         {
-            var appointment = await _context.Appointment.FindAsync(id);
-
-            if (appointment == null)
+            List<Appointment> result = new List<Appointment>();
+            try
             {
-                return  NotFound();
-            }
+                if ( string.IsNullOrEmpty(DoctorName) || date== null)
+                {
+                    var result1 = Content("Invalid Input");
+                    HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    return result1;
 
-            return appointment;
+                }
+                result = await _context.Appointment.Include("Doctor").
+                    Where(x => (x.Doctor.FirstName + ' ' + x.Doctor.LastName == DoctorName)
+                    && (x.AppFrom.Date == date.Date)).ToListAsync();
+                if (result.Count == 0)
+                {
+                    var result1 = Content(" No appointments for the specified Date.Frée to book");
+                    HttpContext.Response.StatusCode = (int)HttpStatusCode.OK;
+                    return result1;
+                }
+            }
+            catch(Exception Ex)
+            {
+                var result1 = Content(" " + Ex.Message );
+                HttpContext.Response.StatusCode = (int)HttpStatusCode.ExpectationFailed;
+                return result1;
+            }
+            return result;
+        }
+
+        [HttpGet]
+        [Route("AppointmentByDoctor")]
+        public async Task<ActionResult<IEnumerable<object>>> GetAppointmentByDoctor([FromQuery]string DoctorName)
+        {
+            if (string.IsNullOrEmpty(DoctorName))
+            {
+                var result1 = Content("Invalid Input");
+                HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return result1;
+
+            }
+            var result = await _context.Appointment.Include("Doctor").
+                Where(x => x.Doctor.FirstName + ' ' + x.Doctor.LastName == DoctorName).
+               Select(x => new { DoctorName = x.Doctor.FirstName, AppointmentFrom = x.AppFrom.ToString("dd-MM-yyyy HH:mm"), AppointmentTo = x.AppTo.ToString(), BookedPatient = x.Patient.FirstName }).
+               ToListAsync();
+            return result;
+            
         }
 
         // PUT: api/Appointments/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutAppointment(long id, Appointment appointment)
+        [HttpPut]
+        [Route("UpdateAppointment")]
+        public async Task<IActionResult> PutAppointment([FromBody] Appointment appointment)
         {
-            if (id != appointment.Id)
+            if (!AppointmentExists(appointment.Id))
             {
                 return BadRequest();
-            }
-
+            }           
             _context.Entry(appointment).State = EntityState.Modified;
-
             try
             {
                 await _context.SaveChangesAsync();
+                var result1 = Content("Updated Appointment");
+                HttpContext.Response.StatusCode = (int)HttpStatusCode.Accepted;
+                return result1;
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!AppointmentExists(id))
+                if (!AppointmentExists(appointment.Id))
                 {
                     return NotFound();
                 }
@@ -73,7 +115,8 @@ namespace DoctorSchedulerAPI.Controller
 
         // POST: api/Appointments
         [HttpPost]
-        public async Task<ActionResult<Appointment>> PostAppointment(Appointment appointment)
+        [Route("NewAppointment")]
+        public async Task<ActionResult<Appointment>> PostAppointment([FromBody]Appointment appointment)
         {
             _context.Appointment.Add(appointment);
             await _context.SaveChangesAsync();
