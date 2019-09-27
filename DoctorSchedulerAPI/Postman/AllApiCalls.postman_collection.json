@@ -1,0 +1,470 @@
+{
+	"info": {
+		"_postman_id": "32d8fa64-539a-4855-af6f-7490a6272b3b",
+		"name": "AllApiCalls",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "https://localhost:44319/api/Appointments/AppointmentByDoctor?DoctorName=Punitha Guruswamy\n",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"Id\":10004,\r\n\"DoctorId\"  :5,\r\n\"PatientId\" :7,\r\n\"AppFrom\":\"2019-09-26T12:00:00\",\r\n\"AppTo\":\"2019-09-26T12:40:00\",\r\n\"Description\":\"Upddated through HttpPutt\"\t\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44319/api/Appointments/AppointmentByDoctor?DoctorName=Punitha Guruswamy\n",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44319",
+					"path": [
+						"api",
+						"Appointments",
+						"AppointmentByDoctor"
+					],
+					"query": [
+						{
+							"key": "DoctorName",
+							"value": "Punitha Guruswamy\n"
+						}
+					]
+				},
+				"description": "Appointment By Doctor"
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:44319/api/Doctors/GetDoctor?name= &Specialization=Cardiologist&Qualification=MD",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"Id\":10004,\r\n\"DoctorId\"  :5,\r\n\"PatientId\" :7,\r\n\"AppFrom\":\"2019-09-26T12:00:00\",\r\n\"AppTo\":\"2019-09-26T12:40:00\",\r\n\"Description\":\"Upddated through HttpPutt\"\t\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44319/api/Doctors/GetDoctor?name= &Specialization=Cardiologist&Qualification=MD",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44319",
+					"path": [
+						"api",
+						"Doctors",
+						"GetDoctor"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": " "
+						},
+						{
+							"key": "Specialization",
+							"value": "Cardiologist"
+						},
+						{
+							"key": "Qualification",
+							"value": "MD"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:44319/api/Appointments/AppointmentByDoctor?DoctorName=Punitha Guruswamy\n",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"Id\":10004,\r\n\"DoctorId\"  :5,\r\n\"PatientId\" :7,\r\n\"AppFrom\":\"2019-09-26T12:00:00\",\r\n\"AppTo\":\"2019-09-26T12:40:00\",\r\n\"Description\":\"Upddated through HttpPutt\"\t\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44319/api/Appointments/AppointmentByDoctor?DoctorName=Punitha Guruswamy\n",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44319",
+					"path": [
+						"api",
+						"Appointments",
+						"AppointmentByDoctor"
+					],
+					"query": [
+						{
+							"key": "DoctorName",
+							"value": "Punitha Guruswamy\n"
+						}
+					]
+				},
+				"description": "aea"
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:44319/api/Appointments/UpdateAppointment",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"Id\":10004,\r\n\"DoctorId\"  :5,\r\n\"PatientId\" :7,\r\n\"AppFrom\":\"2019-09-26T12:00:00\",\r\n\"AppTo\":\"2019-09-26T12:40:00\",\r\n\"Description\":\"Upddated through Punitha Guruswamy\"\r\n\t \r\n}\r\n\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44319/api/Appointments/UpdateAppointment?",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44319",
+					"path": [
+						"api",
+						"Appointments",
+						"UpdateAppointment"
+					],
+					"query": [
+						{
+							"key": "date",
+							"value": "2019-09-26",
+							"disabled": true
+						},
+						{
+							"key": "DoctorName",
+							"value": "Punitha Guruswamy\n",
+							"disabled": true
+						}
+					]
+				},
+				"description": "asd"
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:44319/api/Appointments/NewAppointment",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n\"DoctorId\"  :5,\r\n\"PatientId\" :5,\r\n\"AppFrom\":\"2019-09-26T13:05:00\",\r\n\"AppTo\":\"2019-09-26T13:35:00\",\r\n\"Description\":\"Conflict test\"\r\n\t \r\n}\r\n\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44319/api/Appointments/NewAppointment?",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44319",
+					"path": [
+						"api",
+						"Appointments",
+						"NewAppointment"
+					],
+					"query": [
+						{
+							"key": "date",
+							"value": "2019-09-26",
+							"disabled": true
+						},
+						{
+							"key": "DoctorName",
+							"value": "Punitha Guruswamy\n",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "\n    https://localhost:44319/api/Patients/3\n",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"Id\":10004,\r\n\"DoctorId\"  :5,\r\n\"PatientId\" :7,\r\n\"AppFrom\":\"2019-09-26T12:00:00\",\r\n\"AppTo\":\"2019-09-26T12:40:00\",\r\n\"Description\":\"Upddated through HttpPutt\"\t\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44319/api/Patients/3",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44319",
+					"path": [
+						"api",
+						"Patients",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:44319/api/Appointments/AppointmentByDate?date=2019-09-26&DoctorName=Punitha\n",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"Id\":10004,\r\n\"DoctorId\"  :5,\r\n\"PatientId\" :7,\r\n\"AppFrom\":\"2019-09-26T12:00:00\",\r\n\"AppTo\":\"2019-09-26T12:40:00\",\r\n\"Description\":\"Upddated through HttpPutt\"\t\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44319/api/Appointments/AppointmentByDate?date=2019-09-26&DoctorName=Punitha\n",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44319",
+					"path": [
+						"api",
+						"Appointments",
+						"AppointmentByDate"
+					],
+					"query": [
+						{
+							"key": "date",
+							"value": "2019-09-26"
+						},
+						{
+							"key": "DoctorName",
+							"value": "Punitha\n"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:44319/api/Patients/PatientByName?name=Patient2 Patient2L",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"Id\":10004,\r\n\"DoctorId\"  :5,\r\n\"PatientId\" :7,\r\n\"AppFrom\":\"2019-09-26T12:00:00\",\r\n\"AppTo\":\"2019-09-26T12:40:00\",\r\n\"Description\":\"Upddated through HttpPutt\"\t\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44319/api/Patients/PatientByName?name=Patient2 Patient2L",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44319",
+					"path": [
+						"api",
+						"Patients",
+						"PatientByName"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Patient2 Patient2L"
+						}
+					]
+				},
+				"description": "ewq"
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:44319/api/Patients/NewPatient",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n \"DiseaseId\":1,\r\n\"FirstName\"  :\"Hans-Peter\",\r\n\"LastName\" :\"Wagner\",\r\n\"DateOfBirth\":\"2000-09-26T12:00:00\",\r\n\"Email\":\"blaba@yahoo.com\"\r\n\t\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44319/api/Patients/NewPatient",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44319",
+					"path": [
+						"api",
+						"Patients",
+						"NewPatient"
+					]
+				},
+				"description": "adf"
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:44319/api/Patients/UpdatePatient",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"Id\":8,\r\n \"DiseaseId\":1,\r\n\"FirstName\"  :\"Hans-Peter\",\r\n\"LastName\" :\"Wagner\",\r\n\"DateOfBirth\":\"2000-09-26T12:00:00\",\r\n\"Email\":\"blaba@yahoo.com\",\r\n\"PhoneNumber\":\"568278724837598\"\r\n\t\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44319/api/Patients/UpdatePatient",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44319",
+					"path": [
+						"api",
+						"Patients",
+						"UpdatePatient"
+					]
+				},
+				"description": "gsdf"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
