@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DoctorSchedulerAPI.Migrations
 {
     [DbContext(typeof(MedicalContext))]
-    [Migration("20190924112721_AddPatient")]
-    partial class AddPatient
+    [Migration("20190927152446_AllTablesAtOnce")]
+    partial class AllTablesAtOnce
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,31 @@ namespace DoctorSchedulerAPI.Migrations
                 .HasAnnotation("ProductVersion", "2.2.3-servicing-35854")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("DoctorSchedulerAPI.Models.Appointment", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("AppFrom");
+
+                    b.Property<DateTime>("AppTo");
+
+                    b.Property<string>("Description");
+
+                    b.Property<long>("DoctorId");
+
+                    b.Property<long>("PatientId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DoctorId");
+
+                    b.HasIndex("PatientId");
+
+                    b.ToTable("Appointment");
+                });
 
             modelBuilder.Entity("DoctorSchedulerAPI.Models.Disease", b =>
                 {
@@ -54,6 +79,10 @@ namespace DoctorSchedulerAPI.Migrations
 
                     b.Property<string>("PhoneNumber");
 
+                    b.Property<string>("Qualification");
+
+                    b.Property<string>("Specialization");
+
                     b.HasKey("Id");
 
                     b.ToTable("Doctors");
@@ -67,9 +96,7 @@ namespace DoctorSchedulerAPI.Migrations
 
                     b.Property<DateTime>("DateOfBirth");
 
-                    b.Property<int?>("DiseaseId");
-
-                    b.Property<long?>("DiseaseId1");
+                    b.Property<long>("DiseaseId");
 
                     b.Property<string>("Email");
 
@@ -81,16 +108,30 @@ namespace DoctorSchedulerAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DiseaseId1");
+                    b.HasIndex("DiseaseId");
 
                     b.ToTable("Patients");
+                });
+
+            modelBuilder.Entity("DoctorSchedulerAPI.Models.Appointment", b =>
+                {
+                    b.HasOne("DoctorSchedulerAPI.Models.Doctor", "Doctor")
+                        .WithMany()
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("DoctorSchedulerAPI.Models.Patient", "Patient")
+                        .WithMany()
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("DoctorSchedulerAPI.Models.Patient", b =>
                 {
                     b.HasOne("DoctorSchedulerAPI.Models.Disease", "Disease")
                         .WithMany()
-                        .HasForeignKey("DiseaseId1");
+                        .HasForeignKey("DiseaseId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }
