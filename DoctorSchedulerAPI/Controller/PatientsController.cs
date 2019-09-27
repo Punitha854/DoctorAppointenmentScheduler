@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using DoctorSchedulerAPI.Models;
+using System.Net;
 
 namespace DoctorSchedulerAPI.Controller
 {
@@ -41,24 +42,42 @@ namespace DoctorSchedulerAPI.Controller
             return patient;
         }
 
-        // PUT: api/Patients/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutPatient(long id, Patient patient)
+        [HttpGet]
+        [Route("PatientByName")]
+        public async Task<ActionResult<Patient>> GetPatientByName(string name)
         {
-            if (id != patient.Id)
+            Patient patient = await _context.Patients.Where(x => (x.FirstName +' '+ x.LastName == name)).FirstOrDefaultAsync<Patient>();
+
+            if (patient == null)
+            {
+                var result1 = Content("Patient not found");
+                HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return result1;
+            }
+
+            return patient;
+        }
+        // PUT: api/Patients/5
+        [HttpPut]
+        [Route("UpdatePatient")]
+        public async Task<IActionResult> PutPatient(Patient patient)
+        {
+            if (!PatientExists(patient.Id))
             {
                 return BadRequest();
             }
-
             _context.Entry(patient).State = EntityState.Modified;
 
             try
             {
                 await _context.SaveChangesAsync();
+                //var result1 = Content("Updated Patient");
+                //HttpContext.Response.StatusCode = (int)HttpStatusCode.Accepted;
+                //return result1;
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!PatientExists(id))
+                if (!PatientExists(patient.Id))
                 {
                     return NotFound();
                 }
@@ -68,12 +87,13 @@ namespace DoctorSchedulerAPI.Controller
                 }
             }
 
-            return NoContent();
+            return Accepted();
         }
 
         // POST: api/Patients
         [HttpPost]
-        public async Task<ActionResult<Patient>> PostPatient(Patient patient)
+        [Route("NewPatient")]
+        public async Task<ActionResult<Patient>> PostPatient([FromBody]Patient patient)
         {
             _context.Patients.Add(patient);
             await _context.SaveChangesAsync();
@@ -83,6 +103,7 @@ namespace DoctorSchedulerAPI.Controller
 
         // DELETE: api/Patients/5
         [HttpDelete("{id}")]
+
         public async Task<ActionResult<Patient>> DeletePatient(long id)
         {
             var patient = await _context.Patients.FindAsync(id);

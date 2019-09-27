@@ -46,18 +46,18 @@ namespace DoctorSchedulerAPI.Controller
                 result = await _context.Appointment.Include("Doctor").
                     Where(x => (x.Doctor.FirstName + ' ' + x.Doctor.LastName == DoctorName)
                     && (x.AppFrom.Date == date.Date)).ToListAsync();
-                if (result.Count == 0)
-                {
-                    var result1 = Content(" No appointments for the specified Date.Frée to book");
-                    HttpContext.Response.StatusCode = (int)HttpStatusCode.OK;
-                    return result1;
-                }
+                //if (result.Count == 0)
+                //{
+                //    var result1 = Content(" No appointments for the specified Date.Frée to book");
+                //    HttpContext.Response.StatusCode = (int)HttpStatusCode.OK;
+                //    return Accepted();
+                //}
             }
             catch(Exception Ex)
             {
                 var result1 = Content(" " + Ex.Message );
                 HttpContext.Response.StatusCode = (int)HttpStatusCode.ExpectationFailed;
-                return result1;
+                return NoContent();
             }
             return result;
         }
@@ -94,9 +94,9 @@ namespace DoctorSchedulerAPI.Controller
             try
             {
                 await _context.SaveChangesAsync();
-                var result1 = Content("Updated Appointment");
-                HttpContext.Response.StatusCode = (int)HttpStatusCode.Accepted;
-                return result1;
+                //var result1 = Content("Updated Appointment");
+                //HttpContext.Response.StatusCode = (int)HttpStatusCode.Accepted;
+                //return result1;
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -110,7 +110,7 @@ namespace DoctorSchedulerAPI.Controller
                 }
             }
 
-            return NoContent();
+            return Accepted();
         }
 
         // POST: api/Appointments

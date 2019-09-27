@@ -34,11 +34,32 @@ namespace DoctorSchedulerAPI.Controller
         [Route("GetDoctor")]
         public async Task<ActionResult<IEnumerable<Doctor>>> GetDoctor([FromQuery] string name,string Specialization,string Qualification)
         {
+            List<Doctor> doctors = new List<Doctor>();
 
-            List<Doctor> doctors = await _context.Doctors.Where(x => string.IsNullOrEmpty(name) ? true : (x.FirstName + ' ' + x.LastName == name)
-                                       || string.IsNullOrEmpty(Specialization) ? true : x.Specialization == Specialization
-                                       || string.IsNullOrEmpty(Qualification) ? true : x.Qualification == Qualification).
-                                       ToListAsync<Doctor>(); //  Or  x.Qualification == Qualification or x.Specialization = Specialization) ;
+            //List<Doctor> doctors = await _context.Doctors.Where(x => string.IsNullOrEmpty(name) ? true : (x.FirstName + ' ' + x.LastName == name)
+            //                           || string.IsNullOrEmpty(Specialization) ? true : x.Specialization == Specialization
+            //                           || string.IsNullOrEmpty(Qualification) ? true : x.Qualification == Qualification).
+            //                           ToListAsync<Doctor>(); 
+
+            if (!string.IsNullOrEmpty(name))
+            {
+                doctors = await _context.Doctors.Where(x => (x.FirstName + ' ' + x.LastName == name)).ToListAsync<Doctor>();
+                if (!string.IsNullOrEmpty(Specialization))
+                    doctors= doctors.Where( x=> x.Specialization == Specialization).ToList();
+                if (!string.IsNullOrEmpty(Qualification))
+                    doctors = doctors.Where(x => x.Qualification == Qualification).ToList();
+            }
+            else if (!string.IsNullOrEmpty(Specialization))
+            {
+                doctors = await _context.Doctors.Where(x => x.Specialization == Specialization).ToListAsync<Doctor>(); 
+                if (!string.IsNullOrEmpty(Qualification))
+                    doctors = doctors.Where(x => x.Qualification == Qualification).ToList();
+            }
+            else if (!string.IsNullOrEmpty(Qualification))
+            {
+                doctors = await _context.Doctors.Where(x => x.Qualification == Qualification).ToListAsync<Doctor>();
+
+            }
 
             if (doctors.Count == 0)
             {
