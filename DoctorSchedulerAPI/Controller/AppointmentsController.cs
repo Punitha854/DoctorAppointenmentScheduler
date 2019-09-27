@@ -25,12 +25,12 @@ namespace DoctorSchedulerAPI.Controller
         // GET: api/Appointments/5
         [HttpGet]
         [Route("AppointmentByDate")]
-        public async Task<ActionResult<IEnumerable<Appointment>>> GetAppointmentByDate([FromQuery]string  DoctorName,DateTime date)
+        public async Task<ActionResult<IEnumerable<Appointment>>> GetAppointmentByDate([FromQuery]string  doctorName,DateTime date)
         {
             List<Appointment> result = new List<Appointment>();
             try
             {
-                if ( string.IsNullOrEmpty(DoctorName) || date== null)
+                if ( string.IsNullOrEmpty(doctorName) || date== null)
                 {
                     var result1 = Content("Invalid Input");
                     HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
@@ -38,7 +38,7 @@ namespace DoctorSchedulerAPI.Controller
 
                 }
                 result = await _context.Appointment.Include("Doctor").
-                    Where(x => (x.Doctor.FirstName + ' ' + x.Doctor.LastName == DoctorName)
+                    Where(x => (x.Doctor.FirstName + ' ' + x.Doctor.LastName == doctorName)
                     && (x.AppFrom.Date == date.Date)).ToListAsync();
                 if (result.Count == 0)
                 {
@@ -58,9 +58,9 @@ namespace DoctorSchedulerAPI.Controller
 
         [HttpGet]
         [Route("AppointmentByDoctor")]
-        public async Task<ActionResult<IEnumerable<object>>> GetAppointmentByDoctor([FromQuery]string DoctorName)
+        public async Task<ActionResult<IEnumerable<object>>> GetAppointmentByDoctor([FromQuery]string doctorName)
         {
-            if (string.IsNullOrEmpty(DoctorName))
+            if (string.IsNullOrEmpty(doctorName))
             {
                 var result1 = Content("Invalid Input");
                 HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
@@ -68,7 +68,7 @@ namespace DoctorSchedulerAPI.Controller
 
             }
             var result = await _context.Appointment.Include("Doctor").
-                Where(x => x.Doctor.FirstName + ' ' + x.Doctor.LastName == DoctorName).
+                Where(x => x.Doctor.FirstName + ' ' + x.Doctor.LastName == doctorName).
                Select(x => new { DoctorName = x.Doctor.FirstName, AppointmentFrom = x.AppFrom.ToString("dd-MM-yyyy HH:mm"), AppointmentTo = x.AppTo.ToString(), BookedPatient = x.Patient.FirstName }).
                ToListAsync();
             return result;
@@ -115,8 +115,8 @@ namespace DoctorSchedulerAPI.Controller
         {
             if (appointment == null)
                 return BadRequest();
-            bool IsConflict = _context.Appointment.Any(e => e.AppFrom <= appointment.AppFrom && e.AppTo >= appointment.AppFrom && e.DoctorId != appointment.DoctorId);
-            if (IsConflict)
+            bool isConflict = _context.Appointment.Any(e => e.AppFrom <= appointment.AppFrom && e.AppTo >= appointment.AppFrom && e.DoctorId != appointment.DoctorId);
+            if (isConflict)
             {
                 return Conflict("Exists already.Select another time frame");
             }
