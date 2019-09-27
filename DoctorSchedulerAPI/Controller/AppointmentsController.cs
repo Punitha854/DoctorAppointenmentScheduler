@@ -70,7 +70,7 @@ namespace DoctorSchedulerAPI.Controller
             {
                 var result1 = Content("Invalid Input");
                 HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                return result1;
+                return BadRequest();
 
             }
             var result = await _context.Appointment.Include("Doctor").
