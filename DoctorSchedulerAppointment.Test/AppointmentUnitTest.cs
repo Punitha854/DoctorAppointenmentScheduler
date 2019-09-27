@@ -59,7 +59,7 @@ namespace DoctorSchedulerAppointment.Test
                 apm.AppTo = DateTime.Now.AddMinutes(60);
                 apm.DoctorId = 2;
                 apm.PatientId = 2;
-                 var response  = controller.PostAppointment(apm);
+                var response  = controller.PostAppointment(apm);
                 result = response.IsCompletedSuccessfully;
                // Assert.IsType<CreatedAtActionResult>(response.IsCompletedSuccessfully);
 
@@ -76,8 +76,8 @@ namespace DoctorSchedulerAppointment.Test
                 var controller = new AppointmentsController(dbContext);
                 var response = controller.GetAppointmentByDoctor("Steffan Bucksath");
 
-                var puni = response.Result.Value;
-                result = puni != null;
+                var doctor = response.Result.Value;
+                result = doctor != null;
             }
             Assert.True(result);
         }
