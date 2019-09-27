@@ -52,7 +52,7 @@ namespace DoctorSchedulerAPI.Controller
             {
                 var result1 = Content("Patient not found");
                 HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                return result1;
+                return BadRequest();
             }
 
             return patient;
