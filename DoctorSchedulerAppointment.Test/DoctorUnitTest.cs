@@ -12,6 +12,10 @@ namespace DoctorSchedulerAppointment.Test
 {
     public class DoctorUnitTest
     {
+        /// <summary>
+        /// Unit testing for testing GetDoctor API based on search parameters
+        /// </summary>
+        /// <returns></returns>
         [Fact]
         public async Task TestGetDoctor()
         {

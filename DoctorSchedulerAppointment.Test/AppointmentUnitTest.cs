@@ -10,9 +10,13 @@ using System.Net;
 
 namespace DoctorSchedulerAppointment.Test
 {
+    /// <summary>
+    /// This unit tests completly tests all the APi realted to the model appointment
+    /// </summary>
 
     public class AppointmentUnitTest
     {
+        
         [Fact]
         public async Task TestAppointmentByDate()
         {

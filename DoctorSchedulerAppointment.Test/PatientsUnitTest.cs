@@ -12,7 +12,10 @@ namespace DoctorSchedulerAppointment.Test
 {
     public class PatientUnitTest
     {
-
+        /// <summary>
+        /// Unit testing for getting an patient by the name filter
+        /// </summary>
+        /// <returns></returns>
         [Fact]
         public async Task TestGetPatientByName()
         {
@@ -27,7 +30,10 @@ namespace DoctorSchedulerAppointment.Test
             Assert.True(result);
 
         }
-
+        /// <summary>
+        /// Unit testing for updating existing patient
+        /// </summary>
+        /// <returns></returns>
         [Fact]
         public async Task TestUpdatePatient()
         {
@@ -44,7 +50,10 @@ namespace DoctorSchedulerAppointment.Test
             Assert.True(result);
         }
 
-
+        /// <summary>
+        /// Units test for creating new patient
+        /// </summary>
+        /// <returns></returns>
         [Fact]
         public async Task TestNewPatient()
         {

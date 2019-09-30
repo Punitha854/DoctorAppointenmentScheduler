@@ -7,6 +7,11 @@ namespace DoctorSchedulerAppointment.Test
 {
     public static class DbContextExtensions
     {
+        /// <summary>
+        /// This function will seed  the data for each object on every instance creation of the parent record.
+        /// ALl this data is stored is in built memory of .net core
+        /// </summary>
+        /// <param name="dbContext"> A complex object which performs the object relation mapping</param>
         public static void Seed(this MedicalContext dbContext)
         {
             dbContext.Appointment.Add(

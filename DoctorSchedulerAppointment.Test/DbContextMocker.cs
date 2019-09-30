@@ -7,20 +7,20 @@ namespace DoctorSchedulerAppointment.Test
 {
     public static class DbContextMocker
     {
+        /// <summary>
+        /// Create options for DbContext instance
+        /// Create instance of DbContext
+        /// Add entities in memory
+        /// </summary>
+        /// <param name="dbName"></param>
+        /// <returns></returns>
         public static MedicalContext  GetDoctorSchedulerDbContext(string dbName)
-        {
-            // Create options for DbContext instance
+        {            
             var options = new DbContextOptionsBuilder<MedicalContext>()
                 .UseInMemoryDatabase(databaseName: dbName)
-                .Options;
-
-            // Create instance of DbContext
-            var dbContext = new MedicalContext(options);
-            
-
-            // Add entities in memory
+                .Options;            
+            var dbContext = new MedicalContext(options); 
             dbContext.Seed();
-
             return dbContext;
         }
     }
