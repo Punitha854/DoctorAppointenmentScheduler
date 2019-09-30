@@ -22,7 +22,13 @@ namespace DoctorSchedulerAPI.Controller
         }
 
       
-        // GET: api/Appointments/5
+        /// <summary>
+        ///  This is API searches the List of Appointement based on Filters of Doctors and Specified Date.
+        ///  Just returns list of appointments
+        /// </summary>
+        /// <param name="doctorName"></param>
+        /// <param name="date"></param>
+        /// <returns>LIst of appointements</returns>
         [HttpGet]
         [Route("AppointmentByDate")]
         public async Task<ActionResult<IEnumerable<Appointment>>> GetAppointmentByDate([FromQuery]string  doctorName,DateTime date)
@@ -56,6 +62,11 @@ namespace DoctorSchedulerAPI.Controller
             return result;
         }
 
+        /// <summary>
+        /// This Api searches the database  and returns list of appointements based upon the given doctor name
+        /// </summary>
+        /// <param name="doctorName"></param>
+        /// <returns>List of appointements</returns>
         [HttpGet]
         [Route("AppointmentByDoctor")]
         public async Task<ActionResult<IEnumerable<object>>> GetAppointmentByDoctor([FromQuery]string doctorName)
@@ -75,7 +86,11 @@ namespace DoctorSchedulerAPI.Controller
             
         }
 
-        // PUT: api/Appointments/5
+        /// <summary>
+        /// This api updates the existing appointment
+        /// </summary>
+        /// <param name="appointment"> It is complex object follows the Model Appointment</param>
+        /// <returns>Action Result of the Database activity update</returns>
         [HttpPut]
         [Route("UpdateAppointment")]
         public async Task<IActionResult> PutAppointment([FromBody] Appointment appointment)
@@ -107,8 +122,11 @@ namespace DoctorSchedulerAPI.Controller
             return Accepted();
         }
 
-        /// Api first verifies whether the Appointenment Time and Doctor are available at the time.
-        // / If else then creates a new appointment
+       /// <summary>
+       /// This api creates a new object appointment and updates in the database
+       /// </summary>
+       /// <param name="appointment"></param>
+       /// <returns>Action result of the database activity</returns>
         [HttpPost]
         [Route("NewAppointment")]
         public async Task<ActionResult<Appointment>> PostAppointment([FromBody]Appointment appointment)

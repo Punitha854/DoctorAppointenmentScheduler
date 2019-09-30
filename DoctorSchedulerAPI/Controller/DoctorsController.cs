@@ -21,7 +21,10 @@ namespace DoctorSchedulerAPI.Controller
             _context = context;
         }
 
-        // GET: api/Doctors
+        /// <summary>
+        /// Just return the list of all appointments in the database 
+        /// </summary>
+        /// <returns> Whole list of incovered appointements</returns>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Doctor>>> GetDoctors()
         {
@@ -29,7 +32,13 @@ namespace DoctorSchedulerAPI.Controller
             return result;// await _context.Doctors.ToListAsync();
         }
 
-        // GET: api/Doctors/5
+        /// <summary>
+        ///  This api  searches the  list of doctors nased on their names, qualification and specialization
+        /// </summary>
+        /// <param name="name">Primtive object string </param>
+        /// <param name="specialization">Primtive object string</param>
+        /// <param name="qualification">Primtive object string</param>
+        /// <returns>List of Doctors , which suits the filter criteria</returns>
         [HttpGet]
         [Route("GetDoctor")]
         public async Task<ActionResult<IEnumerable<Doctor>>> GetDoctor([FromQuery] string name,string specialization,string qualification)

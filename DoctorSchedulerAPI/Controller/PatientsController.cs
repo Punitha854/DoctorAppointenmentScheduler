@@ -28,7 +28,11 @@ namespace DoctorSchedulerAPI.Controller
             return await _context.Patients.ToListAsync();
         }
 
-        // GET: api/Patients/5
+        /// <summary>
+        ///  Get the Patient resord based on the id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<ActionResult<Patient>> GetPatient(long id)
         {
@@ -42,6 +46,11 @@ namespace DoctorSchedulerAPI.Controller
             return patient;
         }
 
+        /// <summary>
+        /// return a  first encounterd patient with the  given name as parameter
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns> Return a singe  record of patient object</returns>
         [HttpGet]
         [Route("PatientByName")]
         public async Task<ActionResult<Patient>> GetPatientByName(string name)
@@ -57,7 +66,11 @@ namespace DoctorSchedulerAPI.Controller
 
             return patient;
         }
-        // PUT: api/Patients/5
+       /// <summary>
+       /// Updates an existing patient record
+       /// </summary>
+       /// <param name="patient"></param>
+       /// <returns></returns>
         [HttpPut]
         [Route("UpdatePatient")]
         public async Task<IActionResult> PutPatient(Patient patient)
@@ -90,7 +103,11 @@ namespace DoctorSchedulerAPI.Controller
             return Accepted();
         }
 
-        // POST: api/Patients
+       /// <summary>
+       ///  On sigining in , a new patients enters his/her details and creates a new patient object 
+       /// </summary>
+       /// <param name="patient"></param>
+       /// <returns> The Update status of the new Patient in the database</returns>
         [HttpPost]
         [Route("NewPatient")]
         public async Task<ActionResult<Patient>> PostPatient([FromBody]Patient patient)
